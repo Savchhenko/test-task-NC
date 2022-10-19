@@ -1,0 +1,30 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+main {
+    margin: 0 auto;
+    width: 80%;
+}
+
+.parent {
+    background-color: red;
+    width: 80vw;
+    height: 30vh;
+    margin-bottom: 2vw;
+}
+.child {
+    background-color: green;
+    width: 50%;
+    height: 50%;
+    text-align: center;
+}
+
+/* Центрирование через CSS  */
+.parent__via-css {
+    display: flex;
+}
+.child__via-css {
+    margin: auto;
+}
