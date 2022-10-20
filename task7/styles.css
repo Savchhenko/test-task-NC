@@ -1,0 +1,11 @@
+.elem {
+    width: 60vw;
+    height: 10vh;
+    background-color: #ccc;
+    margin: 1em 0;
+    display: none;
+}
+
+.active {
+    display: block;
+}
