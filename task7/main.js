@@ -6,12 +6,12 @@ let elems = [...document.querySelectorAll(".elem")];
 // при повторном клике так же по очереди элементы скрываются
 function handleClick() {
     const timer = setInterval(function() {
-        if(elems.length) {
+        if (elems.length) {
             elems[0].classList.toggle("active");
             elems.shift();
         } else {
             clearInterval(timer);
-            elems = [...document.querySelectorAll(".elem")].reverse();
+            elems = [...document.querySelectorAll(".elem")];
         }
     }, 330); 
 };
