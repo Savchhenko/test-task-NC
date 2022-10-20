@@ -26,7 +26,7 @@ function showUserInfo(obj) {
     const userBlock = document.createElement("div");
     userBlock.classList.add("user");
 
-    if (obj.avatar) {
+    if (obj.avatar && /^(ftp|http|https):\/\/[^ "]+$/.test(obj.avatar)) {
         const avatarElem = document.createElement("img");
         avatarElem.classList.add("avatar-img");
         avatarElem.style.backgroundImage = `url(${obj.avatar})`;
@@ -42,6 +42,8 @@ function showUserInfo(obj) {
     userName.style.display = "block";
     userName.style.fontWeight = "600";
     
+    userInfoBlock.appendChild(userName);
+    
     if (obj.email && isEmailValid(obj.email)) {
         const userEmail = document.createElement("span");
         userEmail.innerText = `Email: ${obj.email}`;
@@ -49,9 +51,7 @@ function showUserInfo(obj) {
 
         userInfoBlock.appendChild(userEmail);
     }
-
-    userInfoBlock.appendChild(userName);
-
+    
     userBlock.appendChild(userInfoBlock);
 
     usersSection.appendChild(userBlock);
