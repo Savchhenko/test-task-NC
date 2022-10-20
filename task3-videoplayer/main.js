@@ -2,7 +2,7 @@ const video = document.querySelector(".video__item");
 const videoTime = document.getElementById("videoTime");
 const range = document.getElementById("range");
 
-function timeFormatter(s) {
+function timeFormatter (s) {
     let ms = Math.floor((s - Math.floor(s))*1000);
     let sec = Math.floor(s);
     let min = "00";

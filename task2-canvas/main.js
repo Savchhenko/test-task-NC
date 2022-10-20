@@ -12,7 +12,6 @@ contextTriangle.closePath();
 contextTriangle.strokeStyle = "red";
 contextTriangle.stroke();
 
-
 contextSquare.beginPath();
 contextSquare.rect(610, 440, 130, 130);
 contextSquare.closePath();
