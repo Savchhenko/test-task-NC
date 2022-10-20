@@ -19,7 +19,7 @@ btn.addEventListener("click", () => {
         users.forEach(user => showUserInfo(user));
     })
     .catch(err => console.log("Error: " + err));
-})
+});
 
 // Создаёт div с информацией о пользователе
 function showUserInfo(obj) {
@@ -27,8 +27,8 @@ function showUserInfo(obj) {
     userBlock.classList.add("user");
 
     const avatarElem = document.createElement("img");
-    avatarElem.style.display = "block";
-    avatarElem.style.backgroundImage = obj.avatar;
+    avatarElem.classList.add("avatar-img");
+    avatarElem.style.backgroundImage = `url(${obj.avatar})`;
 
     const userInfoBlock = document.createElement("div")
     userInfoBlock.classList.add("user-info");
