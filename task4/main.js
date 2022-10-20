@@ -4,8 +4,6 @@ const API = "https://reqres.in/api/users";
 let users = [];
 
 btn.addEventListener("click", () => {
-    console.log("button was clicked!");
-
     fetch(API)
     .then(response => { 
         if (!response.ok) {
@@ -20,12 +18,20 @@ btn.addEventListener("click", () => {
     .catch(err => console.log("Error: " + err));
 });
 
+function isEmailValid(email) {
+    const emailRegexp = new RegExp(
+      /^[a-zA-Z0-9][\-_\.\+\!\#\$\%\&\'\*\/\=\?\^\`\{\|]{0,1}([a-zA-Z0-9][\-_\.\+\!\#\$\%\&\'\*\/\=\?\^\`\{\|]{0,1})*[a-zA-Z0-9]@[a-zA-Z0-9][-\.]{0,1}([a-zA-Z][-\.]{0,1})*[a-zA-Z0-9]\.[a-zA-Z0-9]{1,}([\.\-]{0,1}[a-zA-Z]){0,}[a-zA-Z0-9]{0,}$/i
+    );
+  
+    return emailRegexp.test(email); // return true or false
+};
+
 // Создаёт div с информацией о пользователе
 function showUserInfo(obj) {
-    console.log(obj);
     const userBlock = document.createElement("div");
     userBlock.classList.add("user");
 
+    // если ссылка на аватар есть и она валидна, то создаём новый блок
     if (obj.avatar && /^(ftp|http|https):\/\/[^ "]+$/.test(obj.avatar)) {
         const avatarElem = document.createElement("img");
         avatarElem.classList.add("avatar-img");
@@ -34,33 +40,30 @@ function showUserInfo(obj) {
         userBlock.appendChild(avatarElem);
     }
 
-    const userInfoBlock = document.createElement("div")
-    userInfoBlock.classList.add("user-info");
+    // если хотя бы одно из трех полей есть, то создаем новый блок
+    if (obj.first_name || obj.last_name || obj.email) {
+        const userInfoBlock = document.createElement("div")
+        userInfoBlock.classList.add("user-info");
 
-    const userName = document.createElement("span");
-    userName.innerText = `${obj.first_name} ${obj.last_name}`.toUpperCase();
-    userName.style.display = "block";
-    userName.style.fontWeight = "600";
-    
-    userInfoBlock.appendChild(userName);
-    
-    if (obj.email && isEmailValid(obj.email)) {
-        const userEmail = document.createElement("span");
-        userEmail.innerText = `Email: ${obj.email}`;
-        userEmail.style.display = "block";
+        if (obj.first_name || obj.last_name) {
+            const userName = document.createElement("span");
+            userName.innerText = `${obj.first_name} ${obj.last_name}`.toUpperCase();
+            userName.style.display = "block";
+            userName.style.fontWeight = "600";
 
-        userInfoBlock.appendChild(userEmail);
+            userInfoBlock.appendChild(userName);
+        }
+
+        if (obj.email && isEmailValid(obj.email)) {
+            const userEmail = document.createElement("span");
+            userEmail.innerText = `Email: ${obj.email}`;
+            userEmail.style.display = "block";
+    
+            userInfoBlock.appendChild(userEmail);
+        }
+
+        userBlock.appendChild(userInfoBlock);
     }
-    
-    userBlock.appendChild(userInfoBlock);
 
     usersSection.appendChild(userBlock);
-};
-
-function isEmailValid(email) {
-    const emailRegexp = new RegExp(
-      /^[a-zA-Z0-9][\-_\.\+\!\#\$\%\&\'\*\/\=\?\^\`\{\|]{0,1}([a-zA-Z0-9][\-_\.\+\!\#\$\%\&\'\*\/\=\?\^\`\{\|]{0,1})*[a-zA-Z0-9]@[a-zA-Z0-9][-\.]{0,1}([a-zA-Z][-\.]{0,1})*[a-zA-Z0-9]\.[a-zA-Z0-9]{1,}([\.\-]{0,1}[a-zA-Z]){0,}[a-zA-Z0-9]{0,}$/i
-    );
-  
-    return emailRegexp.test(email); // return true or false
 };
